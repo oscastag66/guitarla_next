@@ -13,8 +13,12 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     localStorage.setItem('carrito', JSON.stringify(carrito))
   }, [carrito]) 
-
+  console.log(carrito)
   const agregarCarrito = (producto) => {
+   
+    //console.log(producto)
+    setCarrito ([...carrito, producto])
+    /*
     if (carrito.some( articulo => articulo.id === producto.id )) {
       const carritoActualizado = carrito.map( articulo => {
         if (articulo.id === producto.id ) {
@@ -25,20 +29,10 @@ function MyApp({ Component, pageProps }) {
       setCarrito(carritoActualizado)
     } else {
       setCarrito ([...carrito, producto])
-    }
-
-
-   
+    } 
+    */  
   }
-  const actualizarCantidad = producto => {
-    const carritoActualizado = carrito.map( articulo => {
-      if (articulo.id === producto.id ) {
-        articulo.cantidad = producto.cantidad
-        return articulo
-      }
-    })
-    setCarrito(carritoActualizado)
-  }
+
   const eliminarProducto = id => {
     const carritoActualizado = carrito.filter( articulo => articulo.id !== id )
     setCarrito(carritoActualizado)
@@ -46,7 +40,6 @@ function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} 
     carrito={carrito}
     agregarCarrito = {agregarCarrito}
-    actualizarCantidad={actualizarCantidad}
     eliminarProducto={eliminarProducto}
   />
 }

@@ -4,14 +4,14 @@ import { useRouter } from 'next/router'
 import styles from "../styles/Header.module.css"
 const Header = ({guitarra}) => {
   const router = useRouter()
-  console.log(router.pathname)
+  //console.log(router.pathname)
   return (
     <header className={styles.header}>
         <div className="contenedor">
           <div className={styles.barra}>
             <Link href="/">
               <a>
-              <Image  width={400} height={100} src="/img/logo.svg" alt="Imagen Logo"/>
+              <Image layout="responsive" width={800} height={100} src="/img/logo.svg" alt="Imagen Logo"/>
               </a>                
             </Link>
             <nav className={styles.navegacion}>

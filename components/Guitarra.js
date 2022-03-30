@@ -3,7 +3,8 @@ import Link from 'next/link'
 import styles from '../styles/Guitarra.module.css'
 
 const Guitarra = ({guitarra}) => {
-    const { descripcion, imagen, nombre, precio, url  } = guitarra
+    const { descripcion, imagen, nombre, precio, url, id  } = guitarra
+    //${url}
     return (
         <div className={styles.guitarra}>
           <Image layout='responsive' width={150} height={350} src={imagen.url} alt={`Imagen Guitarra ${nombre}`} />
@@ -11,7 +12,7 @@ const Guitarra = ({guitarra}) => {
               <h3>{nombre}</h3>
               <p className={styles.descripcion}>{descripcion}</p>
               <p className={styles.precio}>${precio}</p>
-              <Link href={`/guitarras/${url}`}>
+              <Link href={`/guitarras/${url}`}> 
                   <a className={styles.enlace}>
                   Ver Producto
                   </a>

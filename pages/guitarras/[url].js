@@ -20,7 +20,13 @@ function Producto({guitarra, agregarCarrito}) {
             precio,
             cantidad 
         }
-        agregarCarrito(guitarraSeleccionada)
+        //console.log(guitarraSeleccionada)
+        //console.log(guitarraSeleccionada.id)
+        
+        if (guitarraSeleccionada.length !== 0) {
+            agregarCarrito(guitarraSeleccionada)
+        }
+        
     }
   return (
       <Layout
@@ -56,12 +62,14 @@ function Producto({guitarra, agregarCarrito}) {
     </Layout>
   )
 }
-
+//url  /guitarras?url=${url}`
 export async function getServerSideProps ({ query: {url}}) {
     const urlGuitarra = `${process.env.API_URL}/guitarras?url=${url}` 
+    //const urlGuitarra = `${process.env.API_URL}?action=getguitarras&jwt=&aplica=blogs&usuario=Demo&id=${url}`
     const respuesta = await fetch(urlGuitarra)
     const guitarra = await respuesta.json()
-    //console.log(guitarra[0])
+    console.log(urlGuitarra)
+    console.log(guitarra[0])
     return {
         props: {
             guitarra 

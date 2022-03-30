@@ -4,9 +4,10 @@ import Layout from '../../components/Layout'
 import { formatearFecha } from '../../helpers'
 import styles from '../../styles/Entrada.module.css'
 const EntradaBlog = ({entrada}) => {
-  
+  const router = useRouter()
+
   const {contenido, imagen, published_at, titulo} = entrada
-  //console.log({imagen})
+  console.log(router.query)
   return (
       <Layout
       pagina={titulo}
@@ -24,28 +25,30 @@ const EntradaBlog = ({entrada}) => {
     </Layout>
   )
 }
-
+//entrada.id.toString()   url: entrada.url
 export async function getStaticPaths() {
     const url = `${process.env.API_URL}/blogs` 
     const respuesta = await fetch(url)
     const entradas = await respuesta.json()
-
     const paths = entradas.map(entrada => ({
-          params: { url: entrada.url } //id.toString()  
+          params: { url: entrada.url } 
     })) 
-        
-   
+    //console.log(paths)
     return {
         paths,
         fallback: false  
     }
 }
-
-export async function getStaticProps({params: { url }}) {  //id
-    
+// url
+export async function getStaticProps({params: { url }}) {   
+    //${id}  ?url=${url}
+    //const urlBlog = `${process.env.API_URL}/blogs/${id}` 
     const urlBlog = `${process.env.API_URL}/blogs?url=${url}` //${id} 
+    //const urlBlog = `${process.env.API_URL}?action=getblogs&jwt=&aplica=blogs&usuario=Demo&id=${url}`
+    
     const respuesta = await fetch(urlBlog)
     const entrada = await respuesta.json()
+    console.log(entrada[0])
     return {
         props: {
            entrada: entrada[0]
@@ -53,16 +56,5 @@ export async function getStaticProps({params: { url }}) {  //id
     }
 
 }
-
-//export async function getServerSideProps({query: { id }}) {
-//    const url = `${process.env.API_URL}/blogs/${id}` 
-//    const respuesta = await fetch(url)
-//    const entrada = await respuesta.json()
-//    return {
-//        props: {
-//           entrada: entrada
-//        }
-//    }
-//}
 
 export default EntradaBlog

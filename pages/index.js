@@ -5,8 +5,13 @@ import Curso from '../components/Curso'
 import ListadoBlog from '../components/ListadoBlog'
 
 export default function Home({guitarras, curso, entradas}) {
-  console.log(entradas)
-  return (
+  //console.log(entradas)
+  //
+  //<Curso 
+  //curso={curso}    
+  ///>
+      
+   return (
     
       <Layout
       pagina='Inicio'
@@ -19,9 +24,6 @@ export default function Home({guitarras, curso, entradas}) {
           guitarras={guitarras}
         />
       </main>
-      <Curso 
-        curso={curso}
-      />
       <section>
         <ListadoBlog 
           entradas={entradas}
@@ -32,24 +34,30 @@ export default function Home({guitarras, curso, entradas}) {
   )
 }
 export async function getServerSideProps() {
+   //const urlGuitarras = `${process.env.API_URL}?action=getguitarras&jwt=&aplica=blogs&usuario=Demo`
+  //const urlCursos = `${process.env.API_URL}?action=getcursos&jwt=&aplica=blogs&usuario=Demo`
+  //const urlBlog = `${process.env.API_URL}?action=getblogs&jwt=&aplica=blogs&usuario=Demo`
   const urlGuitarras = `${process.env.API_URL}/guitarras`
-  const urlCursos = `${process.env.API_URL}/cursos`
+  //const urlCursos = `${process.env.API_URL}/cursos`
   const urlBlog = `${process.env.API_URL}/blogs?_limit=3&_sort=created_at:desc` 
-  const [resGuitarras, resCursos, resBlog] = await Promise.all([
+  //fetch(urlCursos),
+  //resCursos,  
+  const [resGuitarras,  resBlog] = await Promise.all([
     fetch(urlGuitarras),
-    fetch(urlCursos),
     fetch(urlBlog)
   ])
-  const [guitarras, curso, entradas] = await Promise.all([
+  //resCursos.json(),
+   //curso,  
+  const [guitarras, entradas] = await Promise.all([
     resGuitarras.json(),
-    resCursos.json(),
     resBlog.json()
   ])
-
+  //console.log(urlCursos)
+  //console.log(curso) 
+  //curso: curso,
   return {
     props: {
         guitarras: guitarras,
-        curso: curso,
         entradas: entradas
     }
   }

@@ -1,6 +1,6 @@
 .header {
    
-    background-image: linear-gradient(to right, rgb(0 0 0 / .8), rgb(0 0 0 / .7), url(../public/img/header.jpg));
+    background-image:  url(../public/img/header.jpg);
     background-color: black;
     background-size: cover;
     background-position: 50%;

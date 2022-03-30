@@ -6,7 +6,9 @@ import styles from '../styles/Entrada.module.css'
 
 const Entrada = ({entrada}) => {
     const {titulo, resumen, imagen, published_at, id, url} = entrada
-  return (
+  // /blog/${url}
+  //console.log(id)
+    return (
     <article>
         <Image priority="true" layout='responsive' width={800} height={600} src={imagen.url} alt={`imagen blog ${titulo}`} />
      <div className={styles.contenido} >

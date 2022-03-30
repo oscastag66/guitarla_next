@@ -31,7 +31,7 @@
 }
 .copyright {
     font-size: 2.8rem;
-    color: var(--blanco);
+    color: var(--primary);
     font-weight: 700;   
     text-align: center;
 }
